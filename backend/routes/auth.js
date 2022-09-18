@@ -3,7 +3,7 @@ const User = require('../models/User');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const bycrypt = require('bcrypt');
-const fetchUser= require('../middleware/fetchUser');
+const fetchUser = require('../middleware/fetchUser');
 const jwt = require('jsonwebtoken'); // used for importing the json web token.
 
 const JWT_SECRET = 'mananisagoodb&$oy'; // hashing signature used in the salting mechanism.
@@ -90,23 +90,23 @@ body('password', 'Password Cannot be blank').exists()]
       }
 
       const authtoken = jwt.sign(payload, JWT_SECRET);
-      res.json({authtoken});
+      res.json({ authtoken });
     } catch (error) {
       console.error(error.message);
-      res.status(500).json({error:'Internal Server Error'});
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   })
 
 // Route 3:- Get Logged in user details
-router.post('/getUser', fetchUser ,async (req,res)=>{
+router.post('/getUser', fetchUser, async (req, res) => {
   try {
 
-    const user= req.user.id;
-    const userDetails= await User.findById(user).select('-password');
+    const user = req.user.id;
+    const userDetails = await User.findById(user).select('-password');
     res.send(userDetails);
   } catch (error) {
     console.error(err.message);
-    res.status(400).json({error:"Internal Server Error"});
+    res.status(400).json({ error: "Internal Server Error" });
   }
 })
 module.exports = router;
