@@ -1,6 +1,7 @@
 import React from 'react'
 import { useContext } from 'react';
 import NoteContext from '../contexts/notes/NoteContext';
+import Note from './Notes';
 const Home = () => {
   const fetchedNotes=  useContext(NoteContext);
   const {Notes ,setNotes}= fetchedNotes;
@@ -26,14 +27,7 @@ const Home = () => {
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
       </div>
-      <div className="container my-3">
-
-        <h3>Your Notes</h3>
-        {Notes.map((note)=>{
-          return note.date;
-        })}
-      </div>
-
+      <Note/>
     </div>
   )
 }

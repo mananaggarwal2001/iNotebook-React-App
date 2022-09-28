@@ -19,7 +19,79 @@ const NoteState = (props) => {
         "tag": "Manan is a good boy",
         "date": "2022-09-21T18:25:03.104Z",
         "__v": 0
-      }
+      },
+      {
+        "_id": "632b56ffe2717ac966a13a8d",
+        "user": "6321fdd39ab26d93b007cc26",
+        "title": "my title",
+        "description": "my First testing note used for checking the request",
+        "tag": "Manan is a good boy",
+        "date": "2022-09-21T18:25:03.104Z",
+        "__v": 0
+      },
+      {
+        "_id": "632b56ffe2717ac966a13a8d",
+        "user": "6321fdd39ab26d93b007cc26",
+        "title": "my title",
+        "description": "my First testing note used for checking the request",
+        "tag": "Manan is a good boy",
+        "date": "2022-09-21T18:25:03.104Z",
+        "__v": 0
+      },
+      {
+        "_id": "632b56ffe2717ac966a13a8d",
+        "user": "6321fdd39ab26d93b007cc26",
+        "title": "my title",
+        "description": "my First testing note used for checking the request",
+        "tag": "Manan is a good boy",
+        "date": "2022-09-21T18:25:03.104Z",
+        "__v": 0
+      },
+      {
+        "_id": "632b56ffe2717ac966a13a8d",
+        "user": "6321fdd39ab26d93b007cc26",
+        "title": "my title",
+        "description": "my First testing note used for checking the request",
+        "tag": "Manan is a good boy",
+        "date": "2022-09-21T18:25:03.104Z",
+        "__v": 0
+      },
+      {
+        "_id": "632b56ffe2717ac966a13a8d",
+        "user": "6321fdd39ab26d93b007cc26",
+        "title": "my title",
+        "description": "my First testing note used for checking the request",
+        "tag": "Manan is a good boy",
+        "date": "2022-09-21T18:25:03.104Z",
+        "__v": 0
+      },
+      {
+        "_id": "632b56ffe2717ac966a13a8d",
+        "user": "6321fdd39ab26d93b007cc26",
+        "title": "my title",
+        "description": "my First testing note used for checking the request",
+        "tag": "Manan is a good boy",
+        "date": "2022-09-21T18:25:03.104Z",
+        "__v": 0
+      },
+      {
+        "_id": "632b56ffe2717ac966a13a8d",
+        "user": "6321fdd39ab26d93b007cc26",
+        "title": "my title",
+        "description": "my First testing note used for checking the request",
+        "tag": "Manan is a good boy",
+        "date": "2022-09-21T18:25:03.104Z",
+        "__v": 0
+      },
+      {
+        "_id": "632b56ffe2717ac966a13a8d",
+        "user": "6321fdd39ab26d93b007cc26",
+        "title": "my title",
+        "description": "my First testing note used for checking the request",
+        "tag": "Manan is a good boy",
+        "date": "2022-09-21T18:25:03.104Z",
+        "__v": 0
+      },
     ];
 
     const [Notes, setNotes] = useState(notesIntial)
