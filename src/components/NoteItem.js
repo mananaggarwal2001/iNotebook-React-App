@@ -12,6 +12,8 @@ const NoteItem = (props) => {
                 <div className="d-flex iconclass">
                     <i className="fa-solid fa-trash-can mx-2"></i>
                     <i className="fa-solid fa-file-pen mx-2"></i>
+                    <i class="fa-solid fa-trash-can mx-2"></i>
+                    <i class="fa-solid fa-file-pen mx-2"></i>
                 </div>
             </div>
         </div>

@@ -7,7 +7,6 @@ import NoteItem from './NoteItem';
 const Notes = () => {
     const fetchedNotes = useContext(NoteContext);
     const { notes, setNotes } = fetchedNotes;
-
     return (
         <>
             <AddNote />
@@ -19,6 +18,7 @@ const Notes = () => {
                 })}
             </div>
         </>
+
     )
 }
 
