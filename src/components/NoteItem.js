@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import NoteContext from '../contexts/notes/NoteContext';
 
 const NoteItem = (props) => {
-    const {note}= props; // dereferencing the props state for getting the note as passed in the note state.
+    const {note, updateNote}= props; // dereferencing the props state for getting the note as passed in the note state.
     const context= useContext(NoteContext);
     const {notes,deleteNote}= context;
 
@@ -15,7 +15,7 @@ const NoteItem = (props) => {
                 </div>
                 <div className="d-flex iconclass">
                     <i className="fa-solid fa-trash-can mx-2" onClick={()=>{deleteNote(note._id)}}></i>
-                    <i className="fa-solid fa-file-pen mx-2"></i>
+                    <i className="fa-solid fa-file-pen mx-2" onClick={()=>{updateNote(note)}}></i>
                 </div>
             </div>
         </div>
