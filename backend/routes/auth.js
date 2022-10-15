@@ -66,20 +66,21 @@ body('password', 'Password Cannot be blank').exists()]
   , async (req, res) => {
     const errors = validationResult(req);
     if (!errors) {
-      res.status(404).json({ errors: errors.array() });
+      res.status(404).json({ success:false,  errors: errors.array() });
     }
 
     const { email, password } = req.body;
     try {
+      let success= false;
       let user = await User.findOne({ email });
       if (!user) {
-        res.status(400).json({ error: "Please Enter the correct credentials" });
+        res.status(400).json({success:false, error: "Please Enter the correct credentials" });
 
       }
 
       const compareThePassword = await bycrypt.compare(password, user.password);
       if (!compareThePassword) {
-        res.status(400).json({ error: "Please Enter the correct credentials" });
+        res.status(400).json({success:false,  error: "Please Enter the correct credentials" });
 
       }
 
@@ -90,7 +91,7 @@ body('password', 'Password Cannot be blank').exists()]
       }
 
       const authtoken = jwt.sign(payload, JWT_SECRET);
-      res.json({ authtoken });
+      res.json({success:true,  authtoken });
     } catch (error) {
       console.error(error.message);
       res.status(500).json({ error: 'Internal Server Error' });

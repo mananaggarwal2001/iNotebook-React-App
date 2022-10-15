@@ -26,15 +26,17 @@ const NoteState = (props) => {
   }
   // Add a note
   const addNote = async (title, description, tag) => {
-    let note = {
-      "_id": "632b56ffe2717ac966a13a8d400",
-      "user": "6321fdd39ab26d93b007cc264",
-      "title": title,
-      "description": description,
-      "tag": tag,
-      "date": "2022-09-21T18:25:03.104Z",
-      "__v": 0
-    };
+    const response = await fetch(`${host}/api/notes/addnote/`, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json',
+        'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjMyMWZkZDM5YWIyNmQ5M2IwMDdjYzI2In0sImlhdCI6MTY2MzUyNDA0NH0.5z2AU9S4KrRORXgtyBC3bckqmkDxt0VlBN6ahPrvLy4',
+      },
+      body: JSON.stringify({title,description,tag}) // body data type must match "Content-Type" header
+    });
     const result = await swal({
       title: "Are you sure want to Add this Note ?",
       icon: "warning",
@@ -42,24 +44,15 @@ const NoteState = (props) => {
       dangerMode: true,
     });
     if (result) {
+      const note = await response.json();
       setNotes(notes.concat(note));
-      const response = await fetch(`${host}/api/notes/addnote/`, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, *cors, same-origin
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
-        headers: {
-          'Content-Type': 'application/json',
-          'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjMyMWZkZDM5YWIyNmQ5M2IwMDdjYzI2In0sImlhdCI6MTY2MzUyNDA0NH0.5z2AU9S4KrRORXgtyBC3bckqmkDxt0VlBN6ahPrvLy4',
-        },
-        body: JSON.stringify({title,description,tag}) // body data type must match "Content-Type" header
-      });
-      const json = response.json();
       swal({
         title: "Note Added Successfully",
         icon: "success"
       })
     }
+
+    return result;
   }
 
   // delete the note
@@ -69,7 +62,7 @@ const NoteState = (props) => {
 
     const boolvalue = await swal({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this imaginary file!",
+      text: "Once deleted you will not be Able to recover this note",
       icon: "warning",
       buttons: true,
       dangerMode: true,
@@ -103,30 +96,34 @@ const NoteState = (props) => {
   // edit the note
   const editNote = async (id, title, description, tag) => {
     // Api call
+    const response = await fetch(`${host}/api/notes/updateNote/${id}`, {
+      method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+      mode: 'cors', // no-cors, *cors, same-origin
+      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      headers: {
+        'Content-Type': 'application/json',
+        'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjMyMWZkZDM5YWIyNmQ5M2IwMDdjYzI2In0sImlhdCI6MTY2MzUyNDA0NH0.5z2AU9S4KrRORXgtyBC3bckqmkDxt0VlBN6ahPrvLy4',
+      },
+      body: JSON.stringify({title, description,tag}) // body data type must match "Content-Type" header
+    });
+    const json = response.json();
     // logic to edit the client.
 
+    let NewNotes= JSON.parse(JSON.stringify(notes));
     for (let index = 0; index < notes.length; index++) {
-      const element = notes[index];
+      const element = NewNotes[index];
       if (element._id === id) {
-        element.title = title;
-        element.description = description;
-        element.tag = tag
+        NewNotes[index].title = title;
+        NewNotes[index].description = description;
+        NewNotes[index].tag = tag
+        break;
       }
 
-      const response = await fetch(`${host}/api/notes/updateNote/${id}`, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, *cors, same-origin
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        headers: {
-          'Content-Type': 'application/json',
-          'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjMyMWZkZDM5YWIyNmQ5M2IwMDdjYzI2In0sImlhdCI6MTY2MzUyNDA0NH0.5z2AU9S4KrRORXgtyBC3bckqmkDxt0VlBN6ahPrvLy4',
-        },
-        body: JSON.stringify({title, description,tag}) // body data type must match "Content-Type" header
-      });
-      const json = response.json();
 
 
     }
+    console.log(NewNotes,id);
+    setNotes(NewNotes);
   }
 
 

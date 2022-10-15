@@ -8,8 +8,8 @@ const NoteItem = (props) => {
 
     return (
         <div className="card col-md-3 mx-3 my-3">
-            <div className="card-body cardclasschange">
-                <div>
+            <div className="card-body cardclasschange text-wrap">
+                <div className='text-wrap'>
                     <h5 className="card-title">{note.title}</h5>
                     <p className="card-text">{note.description}</p>
                 </div>
