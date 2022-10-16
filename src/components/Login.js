@@ -1,5 +1,6 @@
 import React ,{useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import swal from 'sweetalert';
 const Login = () => {
     const [Credentials, setCredentials] = useState({email:"", password:""});
 
@@ -26,7 +27,8 @@ const Login = () => {
             localStorage.setItem('token', json.authtoken);
             navigate('/');
         }else{
-            alert("Failure is formed");
+            await swal({title:"Invalid Credentials", text:"Either you typed the wrong Email-Id or  Wrong Password", icon:"error"});
+            navigate('/login');
         }
 
 

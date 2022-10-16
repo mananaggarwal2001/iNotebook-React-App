@@ -11,6 +11,7 @@ const JWT_SECRET = 'mananisagoodb&$oy'; // hashing signature used in the salting
 // creating a user in the auth by requesting the data from the original user and allows the user to enter into the application.
 
 // ROUTE 1: For Creating the User route using the post request
+let success = false;
 router.post('/createUser', [
   body('email', 'Enter the valid name').isEmail(),
   body('name', 'The given name is not satisfying the given length.').isLength({ min: 3 }),
@@ -21,7 +22,7 @@ router.post('/createUser', [
   const errors = validationResult(req);
   // if there are errors return the bad request and the errors.
   if (!errors.isEmpty()) {
-    return (res.status(400).json({ errors: errors.array() }));
+    return (res.status(400).json({ success, errors: errors.array() }));
   }
   // check whether  the user exists or not.
   try {
@@ -33,7 +34,7 @@ router.post('/createUser', [
 
 
     if (user) {
-      return res.status(400).json({ error: "Sorry a user with this email already exists." }); // if the user is not able to made then we will send the bad request error.
+      return res.status(400).json({ success, error: "Sorry a user with this email already exists." }); // if the user is not able to made then we will send the bad request error.
     } else {
       const salt = await bycrypt.genSalt(10); // used for generating the random string which is added to the main password for more protection
       const secpassword = await bycrypt.hash(req.body.password, salt); // creating the hash of  the plain text password used for storing in the database for the protection of the plain text password.
@@ -50,7 +51,7 @@ router.post('/createUser', [
       }
       const auth_Token = jwt.sign(data, JWT_SECRET); // used for creating hash version of the user data.
 
-      res.json({ auth_Token }); // if the user is made then we will send the user as the response that would show on the screen.
+      res.json({ success: true, auth_Token }); // if the user is made then we will send the user as the response that would show on the screen.
     }
   } catch (error) {
     console.error(error.message); // if the user is not made then we will console the error of the user is not made
@@ -66,22 +67,22 @@ body('password', 'Password Cannot be blank').exists()]
   , async (req, res) => {
     const errors = validationResult(req);
     if (!errors) {
-      res.status(404).json({ success:false,  errors: errors.array() });
+      res.status(404).json({ success: false, errors: errors.array() });
     }
 
     const { email, password } = req.body;
     try {
-      let success= false;
       let user = await User.findOne({ email });
       if (!user) {
-        res.status(400).json({success:false, error: "Please Enter the correct credentials" });
+        res.status(400).json({ success: false, error: "Please Enter the correct credentials" });
 
-      }
+      } else {
 
-      const compareThePassword = await bycrypt.compare(password, user.password);
-      if (!compareThePassword) {
-        res.status(400).json({success:false,  error: "Please Enter the correct credentials" });
+        const compareThePassword = await bycrypt.compare(password, user.password);
+        if (!compareThePassword) {
+          res.status(400).json({ success: false, error: "Please Enter the correct credentials" });
 
+        }
       }
 
       const payload = {
@@ -91,7 +92,7 @@ body('password', 'Password Cannot be blank').exists()]
       }
 
       const authtoken = jwt.sign(payload, JWT_SECRET);
-      res.json({success:true,  authtoken });
+      res.json({ success: true, authtoken });
     } catch (error) {
       console.error(error.message);
       res.status(500).json({ error: 'Internal Server Error' });
