@@ -17,7 +17,7 @@ const NoteState = (props) => {
         credentials: 'same-origin', // include, *same-origin, omit
         headers: {
           'Content-Type': 'application/json',
-          'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjMyMWZkZDM5YWIyNmQ5M2IwMDdjYzI2In0sImlhdCI6MTY2MzUyNDA0NH0.5z2AU9S4KrRORXgtyBC3bckqmkDxt0VlBN6ahPrvLy4',
+          'auth-token': localStorage.getItem('token'),
         },
       });
 
@@ -33,7 +33,7 @@ const NoteState = (props) => {
       credentials: 'same-origin', // include, *same-origin, omit
       headers: {
         'Content-Type': 'application/json',
-        'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjMyMWZkZDM5YWIyNmQ5M2IwMDdjYzI2In0sImlhdCI6MTY2MzUyNDA0NH0.5z2AU9S4KrRORXgtyBC3bckqmkDxt0VlBN6ahPrvLy4',
+        'auth-token': localStorage.getItem('token'),
       },
       body: JSON.stringify({title,description,tag}) // body data type must match "Content-Type" header
     });
@@ -78,7 +78,7 @@ const NoteState = (props) => {
         credentials: 'same-origin', // include, *same-origin, omit
         headers: {
           'Content-Type': 'application/json',
-          'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjMyMWZkZDM5YWIyNmQ5M2IwMDdjYzI2In0sImlhdCI6MTY2MzUyNDA0NH0.5z2AU9S4KrRORXgtyBC3bckqmkDxt0VlBN6ahPrvLy4',
+          'auth-token': localStorage.getItem('token'),
         },
         // body: JSON.stringify({title, description, tag}) // body data type must match "Content-Type" header
       });
@@ -102,7 +102,7 @@ const NoteState = (props) => {
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
       headers: {
         'Content-Type': 'application/json',
-        'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjMyMWZkZDM5YWIyNmQ5M2IwMDdjYzI2In0sImlhdCI6MTY2MzUyNDA0NH0.5z2AU9S4KrRORXgtyBC3bckqmkDxt0VlBN6ahPrvLy4',
+        'auth-token': localStorage.getItem('token'),
       },
       body: JSON.stringify({title, description,tag}) // body data type must match "Content-Type" header
     });

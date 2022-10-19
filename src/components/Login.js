@@ -17,17 +17,17 @@ const Login = () => {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             headers: {
               'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
             },
             body:JSON.stringify({email:Credentials.email, password:Credentials.password})
         });
-        const json = await response.json();
-        console.log(json);
-        if(json.success){
+        const result = await response.json();
+        if(result.success){
             // Save the auth token and redirect
-            localStorage.setItem('token', json.authtoken);
+            localStorage.setItem('token', result.authtoken); // for storing the token in the Local Storage.
             navigate('/');
         }else{
-            await swal({title:"Invalid Credentials", text:"Either you typed the wrong Email-Id or  Wrong Password", icon:"error"});
+            await swal({title:"Invalid Credentials", text:"Either you typed the wrong Email-Id or Password", icon:"error"});
             navigate('/login');
         }
 
@@ -38,6 +38,7 @@ const Login = () => {
 
     return (
         <div className='container  my-3'>
+            <h2>Login to Continue to the iNoteBook</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="Email" className="form-label">Email address</label>
